@@ -11,7 +11,7 @@ class CollapsingNavigationDrawer extends StatefulWidget {
 class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
     with SingleTickerProviderStateMixin {
   double maxWidth = 210;
-  double minWidth = 65;
+  double minWidth = 55;
   bool isCollapsed = false;
   AnimationController _animationController;
   Animation<double> widthAnimation;
@@ -20,8 +20,8 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 300));
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
     widthAnimation = Tween<double>(begin: maxWidth, end: minWidth)
         .animate(_animationController);
   }
@@ -36,7 +36,6 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
 
   Widget getWidget(context, widget) {
     return Material(
-
       elevation: 80.0,
       child: Container(
         width: widthAnimation.value,
@@ -53,7 +52,7 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                 });
               },
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical:20.0),
+                padding: const EdgeInsets.symmetric(vertical: 10.0),
                 child: AnimatedIcon(
                   icon: AnimatedIcons.arrow_menu,
                   progress: _animationController,
@@ -62,24 +61,36 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                 ),
               ),
             ),
-            CollapsingListTile(title: 'Techie', icon: Icons.person, animationController: _animationController,),
-            Divider(color: Colors.grey[200], height: 40.0,),
+
+            Divider(
+              color: Colors.grey[200],
+              height: 30.0,
+            ),
             Expanded(
               child: ListView.separated(
                 separatorBuilder: (context, counter) {
-                  return Divider(height: 12.0);
+                  return Divider(
+                    height: 12.0,
+                    color: Colors.blue[900],
+                  );
                 },
                 itemBuilder: (context, counter) {
                   return CollapsingListTile(
-                      onTap: () {
-                        setState(() {
-                          currentSelectedIndex = counter;
-                        });
-                      },
-                      isSelected: currentSelectedIndex == counter,
-                      title: navigationItems[counter].title,
-                      icon: navigationItems[counter].icon,
-                      animationController: _animationController,
+                    onTap: () {
+                      setState(() {
+                        currentSelectedIndex = counter;
+                      });
+                    },
+                    isAbove: counter == 0
+                        ? false
+                        : counter == currentSelectedIndex - 1,
+                    isBelow: counter == navigationItems.length-1
+                        ? false
+                        : counter == currentSelectedIndex + 1,
+                    isSelected: currentSelectedIndex == counter,
+                    title: navigationItems[counter].title,
+                    icon: navigationItems[counter].icon,
+                    animationController: _animationController,
                   );
                 },
                 itemCount: navigationItems.length,

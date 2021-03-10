@@ -6,14 +6,19 @@ class CollapsingListTile extends StatefulWidget {
   final IconData icon;
   final AnimationController animationController;
   final bool isSelected;
+  final bool isAbove;
+  final bool isBelow;
   final Function onTap;
 
-  CollapsingListTile(
-      {@required this.title,
-      @required this.icon,
-      @required this.animationController,
-      this.isSelected = false,
-      this.onTap});
+  CollapsingListTile({
+    @required this.title,
+    @required this.icon,
+    @required this.animationController,
+    this.isSelected = false,
+    this.onTap,
+    this.isAbove,
+    this.isBelow,
+  });
 
   @override
   _CollapsingListTileState createState() => _CollapsingListTileState();
@@ -29,6 +34,10 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
         Tween<double>(begin: 200, end: 70).animate(widget.animationController);
     sizedBoxAnimation =
         Tween<double>(begin: 10, end: 0).animate(widget.animationController);
+
+    print(widget.title);
+    print(widget.isAbove);
+    print(widget.isBelow);
   }
 
   @override
@@ -37,20 +46,23 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
       onTap: widget.onTap,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(16.0)),
-          color: widget.isSelected
-              ? Colors.transparent.withOpacity(0.3)
-              : Colors.transparent,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15),
+            bottomLeft: Radius.circular(15),
+            topRight: widget.isBelow ? Radius.circular(15) : Radius.circular(0),
+            bottomRight: widget.isAbove ? Radius.circular(15) : Radius.circular(0),
+          ),
+          color: widget.isSelected ? Colors.grey[300] : Colors.transparent,
         ),
         width: widthAnimation.value,
-        margin: EdgeInsets.symmetric(horizontal: 8.0),
-        padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         child: Row(
           children: <Widget>[
             Icon(
               widget.icon,
-              color: widget.isSelected ? selectedColor : Colors.white30,
-              size: 30.0,
+              color: widget.isSelected ? Colors.blue[800] : Colors.white,
+              size: 25.0,
+
             ),
             SizedBox(width: sizedBoxAnimation.value),
             (widthAnimation.value >= 190)
