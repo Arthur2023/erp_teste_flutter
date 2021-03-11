@@ -7,8 +7,9 @@ class NavigationModel {
   NavigationModel({this.title, this.icon});
 }
 
+
 List<NavigationModel> navigationItems = [
-  NavigationModel(title: "Dashboard", icon: Icons.insert_chart_outlined),
+  NavigationModel(title: "Dashboard", icon: Icons.insert_chart_outlined,),
   NavigationModel(title: "Errors", icon: Icons.error_outline),
   NavigationModel(title: "Search", icon: Icons.search),
   NavigationModel(title: "Notifications", icon: Icons.notifications_none),

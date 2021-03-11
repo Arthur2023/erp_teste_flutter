@@ -1,5 +1,8 @@
+import 'package:erp_tela_flutter/managers/app_manager.dart';
+
 import '../custom_navigation_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CollapsingNavigationDrawer extends StatefulWidget {
   @override
@@ -10,7 +13,7 @@ class CollapsingNavigationDrawer extends StatefulWidget {
 
 class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
     with SingleTickerProviderStateMixin {
-  double maxWidth = 210;
+  double maxWidth = 190;
   double minWidth = 55;
   bool isCollapsed = false;
   AnimationController _animationController;
@@ -36,12 +39,40 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
 
   Widget getWidget(context, widget) {
     return Material(
-      elevation: 80.0,
       child: Container(
         width: widthAnimation.value,
         color: Colors.blue[900],
         child: Column(
           children: <Widget>[
+            SizedBox(
+              height: 18,
+            ),
+            Expanded(
+              child: ListView.separated(
+                separatorBuilder: (context, counter) {
+                  return Divider(
+                    height: 12.0,
+                    color: Colors.blue[900],
+                  );
+                },
+                itemBuilder: (context, counter) {
+                  return CollapsingListTile(
+                    onTap: () {
+                      setState(() {
+                        currentSelectedIndex = counter;
+                        print("Counter ==> $counter");
+                      });
+                      context.read<AppManager>().jumpToPage(counter);
+                    },
+                    isSelected: currentSelectedIndex == counter,
+                    title: navigationItems[counter].title,
+                    icon: navigationItems[counter].icon,
+                    animationController: _animationController,
+                  );
+                },
+                itemCount: navigationItems.length,
+              ),
+            ),
             InkWell(
               onTap: () {
                 setState(() {
@@ -61,43 +92,8 @@ class CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                 ),
               ),
             ),
-
-            Divider(
-              color: Colors.grey[200],
-              height: 30.0,
-            ),
-            Expanded(
-              child: ListView.separated(
-                separatorBuilder: (context, counter) {
-                  return Divider(
-                    height: 12.0,
-                    color: Colors.blue[900],
-                  );
-                },
-                itemBuilder: (context, counter) {
-                  return CollapsingListTile(
-                    onTap: () {
-                      setState(() {
-                        currentSelectedIndex = counter;
-                      });
-                    },
-                    isAbove: counter == 0
-                        ? false
-                        : counter == currentSelectedIndex - 1,
-                    isBelow: counter == navigationItems.length-1
-                        ? false
-                        : counter == currentSelectedIndex + 1,
-                    isSelected: currentSelectedIndex == counter,
-                    title: navigationItems[counter].title,
-                    icon: navigationItems[counter].icon,
-                    animationController: _animationController,
-                  );
-                },
-                itemCount: navigationItems.length,
-              ),
-            ),
             SizedBox(
-              height: 50.0,
+              height: 5,
             ),
           ],
         ),

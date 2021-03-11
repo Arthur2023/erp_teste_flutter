@@ -22,28 +22,29 @@ class CardListView extends StatelessWidget {
               ),
               for (final i in movements)
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  padding: const EdgeInsets.symmetric(vertical: 1),
                   child: SizedBox(
                     height: 40,
-                    child: Card(
-                      color: Colors.blue[800],
-                      margin: EdgeInsets.symmetric(horizontal: 5),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                          Text(
-                            i.name,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          Text(
-                            i.value.toString(),
-                            style: TextStyle(color: Colors.white),
-                          ),
-                      ],
+                    child: Expanded(
+                      child: Card(
+                        color: Colors.blue[800],
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                            Text(
+                              i.name,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Text(
+                              i.value.toString(),
+                              style: TextStyle(color: Colors.white),
+                            ),
+                        ],
+                      ),
+                          )),
                     ),
-                        )),
                   ),
                 ),
             ],

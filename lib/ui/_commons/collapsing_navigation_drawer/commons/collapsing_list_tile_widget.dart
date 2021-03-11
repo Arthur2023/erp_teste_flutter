@@ -43,37 +43,83 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: widget.onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15),
-            bottomLeft: Radius.circular(15),
-            topRight: widget.isBelow ? Radius.circular(15) : Radius.circular(0),
-            bottomRight: widget.isAbove ? Radius.circular(15) : Radius.circular(0),
-          ),
-          color: widget.isSelected ? Colors.grey[300] : Colors.transparent,
-        ),
-        width: widthAnimation.value,
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-        child: Row(
-          children: <Widget>[
-            Icon(
-              widget.icon,
-              color: widget.isSelected ? Colors.blue[800] : Colors.white,
-              size: 25.0,
-
+        onTap: widget.onTap,
+        child: Column(
+          children: [
+            Container(
+              height: 5,
+              child: Stack(
+                children: [
+                  Container(height: 5,
+                color:widget.isSelected ? Colors.white : Colors.transparent,),
+                  Container(
+                    height: 5,
+                    decoration: BoxDecoration(
+                      color:
+                      widget.isSelected ? Colors.blue[900] : Colors.transparent,
+                      borderRadius: BorderRadius.only(
+                        bottomRight: widget.isSelected
+                            ? Radius.elliptical(55, 25)
+                            : Radius.circular(0),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            SizedBox(width: sizedBoxAnimation.value),
-            (widthAnimation.value >= 190)
-                ? Text(widget.title,
-                    style: widget.isSelected
-                        ? listTitleSelectedTextStyle
-                        : listTitleDefaultTextStyle)
-                : Container()
+            Padding(
+              padding: const EdgeInsets.only(left:3),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    bottomLeft: Radius.circular(15),
+                  ),
+                  color:
+                      widget.isSelected ? Colors.white : Colors.transparent,
+                ),
+                width: widthAnimation.value,
+                padding: EdgeInsets.only(left: 12, right: 0, top: 10, bottom: 10),
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      widget.icon,
+                      color: widget.isSelected ? Colors.blue[800] : Colors.white,
+                      size: 25.0,
+                    ),
+                    SizedBox(width: sizedBoxAnimation.value),
+                    (widthAnimation.value >= 190)
+                        ? Text(widget.title,
+                            style: widget.isSelected
+                                ? listTitleSelectedTextStyle
+                                : listTitleDefaultTextStyle)
+                        : Container(width: 0,)
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              height: 5,
+              child: Stack(
+                children: [
+                  Container(height: 5,
+                      color:widget.isSelected ? Colors.white  : Colors.transparent,),
+                  Container(
+                    height: 5,
+                    decoration: BoxDecoration(
+                      color:
+                      widget.isSelected ? Colors.blue[900] : Colors.transparent,
+                      borderRadius: BorderRadius.only(
+                        topRight: widget.isSelected
+                            ? Radius.elliptical(55, 25)
+                            : Radius.circular(0),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
-        ),
-      ),
-    );
+        ));
   }
 }
