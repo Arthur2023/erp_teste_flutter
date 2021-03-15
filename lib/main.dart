@@ -1,12 +1,12 @@
-import 'package:erp_tela_flutter/app_screen.dart';
-import 'package:erp_tela_flutter/managers/app_manager.dart';
-import 'package:erp_tela_flutter/ui/_commons/collapsing_navigation_drawer/custom_navigation_drawer.dart';
-import 'package:erp_tela_flutter/ui/login/login_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'dart:async';
 
 import 'package:desktop_window/desktop_window.dart';
+import 'package:erp_tela_flutter/app_screen.dart';
+import 'package:erp_tela_flutter/managers/app_manager.dart';
+import 'package:erp_tela_flutter/ui/__commons/theme.dart';
+import 'package:erp_tela_flutter/ui/login/login_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

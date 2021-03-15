@@ -1,4 +1,4 @@
-import '../custom_navigation_drawer.dart';
+import 'custom_navigation_drawer.dart';
 import 'package:flutter/material.dart';
 
 class CollapsingListTile extends StatefulWidget {

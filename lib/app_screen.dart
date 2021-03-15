@@ -1,7 +1,8 @@
 import 'package:erp_tela_flutter/managers/app_manager.dart';
-import 'package:erp_tela_flutter/ui/_commons/collapsing_navigation_drawer/commons/collapsing_navigation_drawer_widget.dart';
+import 'package:erp_tela_flutter/ui/__commons/navigation_drawer/collapsing_navigation_drawer_widget.dart';
 import 'package:erp_tela_flutter/ui/home/home_screen.dart';
 import 'package:erp_tela_flutter/ui/info/info_screen.dart';
+import 'package:erp_tela_flutter/ui/register/registers_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -75,7 +76,7 @@ class AppScreen extends StatelessWidget {
                   children: [
                     HomeScreen(),
                     InfoScreen(),
-                    Container(),
+                    RegistersScreen(),
                     Container(),
                     Container(),
                   ],

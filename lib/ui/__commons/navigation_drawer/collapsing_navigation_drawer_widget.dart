@@ -1,8 +1,9 @@
 import 'package:erp_tela_flutter/managers/app_manager.dart';
-
-import '../custom_navigation_drawer.dart';
+import 'package:erp_tela_flutter/ui/__commons/navigation_drawer/collapsing_list_tile_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'model/navigation_model.dart';
 
 class CollapsingNavigationDrawer extends StatefulWidget {
   @override

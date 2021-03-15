@@ -1,21 +1,16 @@
 import 'package:erp_tela_flutter/services/exe.dart';
 import 'package:erp_tela_flutter/services/web_service.dart';
+import 'package:erp_tela_flutter/ui/__commons/progress_dialogue.dart';
 import 'package:flutter/material.dart';
 
 class InfoScreen extends StatelessWidget {
   TextEditingController searchController = TextEditingController();
+  TextEditingController sendController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Container(
-        //   decoration: BoxDecoration(
-        //       image: DecorationImage(
-        //     image: AssetImage("assets/images/blue.jpeg"),
-        //     fit: BoxFit.fill,
-        //   )),
-        // ),
         Center(
           child: Padding(
             padding: const EdgeInsets.only(
@@ -67,13 +62,15 @@ class InfoScreen extends StatelessWidget {
                                   height: 45,
                                   width: 260,
                                   child: ElevatedButton(
-                                      onPressed: () {
-                                        WsExecute()
+                                      onPressed: () async {
+                                        progressDialog(context);
+                                        await WsExecute()
                                             .executeDb(
                                                 query:
                                                     "/request/navios?codigoEmpresa=1&uid=SyNw6TB5IqYqNJhOoWdUR93o4Ao2&segmento=1")
                                             .then((value) => searchController
                                                 .text = value.toString());
+                                        Navigator.of(context).pop();
                                       },
                                       child: Text("Pesquisar",
                                           style: TextStyle(fontSize: 18))),
@@ -95,12 +92,20 @@ class InfoScreen extends StatelessWidget {
                                       fontSize: 25, color: Colors.blue[900]),
                                 ),
                                 const SizedBox(height: 65),
+                                TextField(
+                                  controller: sendController,
+                                ),
+                                const SizedBox(height: 20),
                                 SizedBox(
                                     height: 45,
                                     width: 260,
                                     child: ElevatedButton(
-                                        onPressed: () {
-                                          Exe().exec();
+                                        onPressed: () async {
+                                          Exe now = Exe();
+                                          progressDialog(context);
+                                          await now.exec(sendController.text);
+                                          searchController.text = now.response;
+                                          Navigator.of(context).pop();
                                         },
                                         child: Text("Pesquisar",
                                             style: TextStyle(fontSize: 18)))),
@@ -115,6 +120,7 @@ class InfoScreen extends StatelessWidget {
                 ),
                 Flexible(
                     child: TextFormField(
+                  readOnly: true,
                   maxLines: 20,
                   controller: searchController,
                   decoration: InputDecoration(
