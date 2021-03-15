@@ -10,7 +10,6 @@ class Exe {
     ProcessResult result = await Process.run(path + "\\" + exe, [a],);
     print(result.stdout);
     response = result.stdout.toString();
-    print(response + "da String");
   }
 }
 
