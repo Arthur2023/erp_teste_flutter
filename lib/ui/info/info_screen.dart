@@ -1,11 +1,12 @@
-import 'package:erp_tela_flutter/services/exe.dart';
+import 'file:///C:/Users/hullk/AndroidStudioProjects/erp_tela_flutter/lib/exes/exe.dart';
 import 'package:erp_tela_flutter/services/web_service.dart';
 import 'package:erp_tela_flutter/ui/__commons/progress_dialogue.dart';
 import 'package:flutter/material.dart';
 
 class InfoScreen extends StatelessWidget {
-  TextEditingController searchController = TextEditingController();
-  TextEditingController sendController = TextEditingController();
+
+  final TextEditingController searchController = TextEditingController();
+  final TextEditingController sendController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

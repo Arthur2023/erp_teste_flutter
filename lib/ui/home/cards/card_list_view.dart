@@ -52,7 +52,7 @@ class CardListView extends StatelessWidget {
         ));
   }
 
-  List<Movement> movements = [
+  final List<Movement> movements = [
     Movement("Shell", 450),
     Movement("Quinta", 700),
     Movement("Shell", 850),

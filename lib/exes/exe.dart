@@ -7,9 +7,11 @@ class Exe {
   String response;
 
   exec(String a) async {
-    ProcessResult result = await Process.run(path + "\\" + exe, [a],);
+    ProcessResult result = await Process.run(
+      path + "\\" + exe,
+      [a],
+    );
     print(result.stdout);
     response = result.stdout.toString();
   }
 }
-

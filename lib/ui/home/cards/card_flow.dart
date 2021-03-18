@@ -12,7 +12,7 @@ class CardFlow extends StatelessWidget {
             title: ChartTitle(
               text: 'Vendas',
               alignment: ChartAlignment.center,
-              textStyle: ChartTextStyle(
+              textStyle: TextStyle(
                 color: Colors.grey[700],
                 fontFamily: 'Roboto',
                 fontStyle: FontStyle.italic,

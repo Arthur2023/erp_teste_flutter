@@ -10,7 +10,7 @@ class CardDonut extends StatelessWidget {
           title: ChartTitle(
               text: 'Materiais',
               alignment: ChartAlignment.center,
-              textStyle: ChartTextStyle(
+              textStyle: TextStyle(
                 color: Colors.grey[700],
                 fontFamily: 'Roboto',
                 fontStyle: FontStyle.italic,
