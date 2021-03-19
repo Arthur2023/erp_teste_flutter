@@ -1,5 +1,5 @@
 import 'file:///C:/Users/hullk/AndroidStudioProjects/erp_tela_flutter/lib/exes/exe.dart';
-import 'package:erp_tela_flutter/services/web_service.dart';
+import 'package:erp_tela_flutter/services/ws_execute.dart';
 import 'package:erp_tela_flutter/ui/__commons/progress_dialogue.dart';
 import 'package:flutter/material.dart';
 
@@ -65,12 +65,12 @@ class InfoScreen extends StatelessWidget {
                                   child: ElevatedButton(
                                       onPressed: () async {
                                         progressDialog(context);
-                                        await WsExecute()
-                                            .executeDb(
-                                                query:
-                                                    "/request/navios?codigoEmpresa=1&uid=SyNw6TB5IqYqNJhOoWdUR93o4Ao2&segmento=1")
+                                        await WebServiceController()
+                                            .get(
+                                            query:
+                                            "/request/navios?codigoEmpresa=1&uid=SyNw6TB5IqYqNJhOoWdUR93o4Ao2&segmento=1")
                                             .then((value) => searchController
-                                                .text = value.toString());
+                                            .text = value.toString());
                                         Navigator.of(context).pop();
                                       },
                                       child: Text("Pesquisar",

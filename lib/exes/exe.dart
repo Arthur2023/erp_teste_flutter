@@ -2,7 +2,7 @@ import 'dart:io';
 
 class Exe {
   String path =
-      "C:\\Users\\hullk\\Desktop\\Precisa Cods\\executable_test_flutter\\build\\windows\\runner\\Release";
+      "C:\\Users\\hullk\\Desktop\\Codigos\\PrecisaCods\\executable_test_flutter\\build\\windows\\runner\\Release";
   String exe = "executable_test_flutter.exe";
   String response;
 

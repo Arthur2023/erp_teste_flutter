@@ -6,6 +6,8 @@ import 'package:erp_tela_flutter/ui/register/registers_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'ui/order/order_screen.dart';
+
 class AppScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -77,7 +79,7 @@ class AppScreen extends StatelessWidget {
                     HomeScreen(),
                     InfoScreen(),
                     RegistersScreen(),
-                    Container(),
+                    OrderScreen(),
                     Container(),
                   ],
                 );
