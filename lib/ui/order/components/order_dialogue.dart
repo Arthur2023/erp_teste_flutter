@@ -2,17 +2,17 @@ import 'package:erp_tela_flutter/models/client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class ClientDialogue extends StatefulWidget {
+class OrderDialogue extends StatefulWidget {
 
   final Client client;
 
-  const ClientDialogue(this.client);
+  const OrderDialogue(this.client);
 
   @override
-  _ClientDialogueState createState() => _ClientDialogueState(client);
+  _OrderDialogueState createState() => _OrderDialogueState(client);
 }
 
-class _ClientDialogueState extends State<ClientDialogue> {
+class _OrderDialogueState extends State<OrderDialogue> {
   final Client client;
 
   final nameController = TextEditingController();
@@ -22,7 +22,7 @@ class _ClientDialogueState extends State<ClientDialogue> {
   final emailController = TextEditingController();
   final addressController = TextEditingController();
 
-  _ClientDialogueState(this.client);
+  _OrderDialogueState(this.client);
 
   @override
   void initState() {
