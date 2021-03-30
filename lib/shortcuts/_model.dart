@@ -1,6 +1,8 @@
+import 'package:erp_tela_flutter/managers/app_manager.dart';
 import 'package:erp_tela_flutter/ui/order/components/create_order.dart';
 import 'package:erp_tela_flutter/ui/register/components/create_client.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../app_screen.dart';
 
@@ -18,8 +20,11 @@ class Model with ChangeNotifier {
 
   void backFocusScope(BuildContext context) {
     for (int i = 0; i < nodes.length; i++) {
-      if (nodes[i].hasFocus && i == 0) {
-        nodes2[2].requestFocus();
+      if (nodes[0].hasFocus) {
+        print('0 TEM FOCO');
+        if(nodes2.length > 0){
+          nodes2[2].requestFocus();}
+        else return;
       }
       else if (nodes[i].hasFocus) {
         print(i - 1);
@@ -27,11 +32,16 @@ class Model with ChangeNotifier {
         print("Saiu");
         break;
       }
+      if(nodes2.isEmpty)
+        continue;
       else if (nodes2[0].hasFocus) {
         nodes[0].requestFocus();
       }
       else if (nodes2[2].hasFocus) {
         closeActualContext(context);
+      }
+      else if (nodes2[1].hasFocus) {
+        nodes2[0].requestFocus();
       }
     }
   }
@@ -50,8 +60,28 @@ void openCreateOrder(BuildContext context) {
 }
 
 void enter(BuildContext context) {
-  Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => AppScreen()));
+  if(nodes[2].hasFocus){
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => AppScreen()));
+  }
+}
+
+void openDrawer(BuildContext context){
+    print("Cheguei até a função");
+    context.read<AppManager>().changeCollapsed();
+    print("Realizei");
+}
+
+void downDrawer(BuildContext context){
+  context.read<AppManager>().changeCurrentSelectedIndex(-1);
+}
+
+void upDrawer(BuildContext context){
+  context.read<AppManager>().changeCurrentSelectedIndex(1);
+}
+
+void selectDrawer(BuildContext context){
+  context.read<AppManager>().jumpToPage(context.read<AppManager>().currentSelectedIndex);
 }
 
 }

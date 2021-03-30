@@ -1,5 +1,6 @@
 import 'package:erp_tela_flutter/app_screen.dart';
 import 'package:erp_tela_flutter/shortcuts/_model.dart';
+import 'package:erp_tela_flutter/shortcuts/back_focus_node.dart';
 import 'package:erp_tela_flutter/shortcuts/enter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,20 +12,45 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  Model model = Model([], []);
+
+  Model model;
+
+  final emailkey = GlobalKey<FormFieldState>();
+  final passkey = GlobalKey<FormFieldState>();
+
+  final emailController = TextEditingController();
+  final passController = TextEditingController();
+
+  FocusNode emailFocus = FocusNode();
+  FocusNode passFocus = FocusNode();
+  FocusNode buttonFocus = FocusNode();
+
+
+  @override
+  void initState() {
+    super.initState();
+    List<FocusNode> nodes = [
+      emailFocus,
+      passFocus,
+      buttonFocus,
+    ];
+
+    model = Model( nodes, []);
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
     return Shortcuts(
       shortcuts: <LogicalKeySet, Intent>{
-        LogicalKeySet(LogicalKeyboardKey.enter): const enterIntent(),
       },
       child: Actions(
         actions: <Type, Action<Intent>>{
-          enterIntent: enterAction(model, context),
+          BackFocusScopeIntent: BackFocusScopeAction(model, context),
         },
         child: Focus(
-          autofocus: true,
           child: Scaffold(
             body: Stack(children: [
               Container(
@@ -59,6 +85,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 10,
                           ),
                           TextField(
+                            focusNode: emailFocus,
+                            autofocus: true,
+                            onSubmitted: (text){
+                              passFocus.requestFocus();
+                            },
+                            controller: emailController,
                             decoration: InputDecoration(
                               hintText: "Email",
                             ),
@@ -67,9 +99,14 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 10,
                           ),
                           TextField(
+                            focusNode: passFocus,
+                            controller: passController,
                             decoration: InputDecoration(
                               hintText: "Senha",
                             ),
+                            onSubmitted: (text){
+                              buttonFocus.requestFocus();
+                            },
                           ),
                           const SizedBox(
                             height: 20,
@@ -77,6 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(
                             height: 45,
                             child: ElevatedButton(
+                              focusNode: buttonFocus,
                                 style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.resolveWith<Color>(

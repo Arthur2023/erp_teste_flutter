@@ -12,15 +12,19 @@ class ChangeStateOrder {
 
   Future<Order> exec(Order o) async {
 
-    print("\n\n\n\n\n\n ########################333");
-    String map = jsonEncode(o.toMap());
-print(map);
-    ProcessResult result = await Process.run(
-      path + "\\" + exe,
-      [map],
-    );
-    print(result.stdout);
-    return Order.fromMap(jsonDecode(result.stdout));
-    print("\n\n\n\n\n\n ########################333");
+    try {
+      String map = jsonEncode(o.toMap());
+      print(map + " =====> Mapa enviado");
+      ProcessResult result = await Process.run(
+        path + "\\" + exe,
+        [map],
+      );
+      if(result.stdout == null)
+        return null;
+      print(result.stdout);
+      return Order.fromMap(jsonDecode(result.stdout));
+    }catch(e){
+      return null;
+    }
   }
 }

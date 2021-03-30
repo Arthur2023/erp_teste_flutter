@@ -78,7 +78,7 @@ class Order {
     'paymentCardId': paymentCardId,
     'paymentCard': paymentCard,
     'retireInStore': retireInStore,
-    'orderDate': '',
+    'orderDate': date,
     'city': address.city,
     'complement': address.complement,
     'district': address.district,
